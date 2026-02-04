@@ -6,16 +6,18 @@
     <title>Klantzijde</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="body">
 
 <!-- HEADER -->
-<header>
-    <div class="logo">Groen & Gewoon Doen</div>
+<header class="header">
+    <h2 class="logo">Groen & Gewoon Doen</h2>
     <nav>
         <span>Menu</span>
         <button>☰</button>
     </nav>
 </header>
+
+<hr class="custom-divider">
 
 <!-- WELKOM -->
 <section class="welcome">
@@ -23,9 +25,12 @@
     <p>Bestel uw tuinservice eenvoudig online!</p>
 </section>
 
+<hr class="custom-divider">
+
 <!-- STANDAARD PAKKETTEN -->
 <section class="standaard">
     <h2>Standaard Pakketten</h2>
+    <hr class="custom-divider">
 
     <select>
         <option>Kies een pakket</option>
@@ -34,24 +39,24 @@
     </select>
 
     <button>Bestel</button>
-</section>
+</section><br>
 
 <!-- CUSTOM OFFERTE -->
 <section class="custom-offerte">
     <h2>Custom Offerte</h2>
-
+    <hr class="custom-divider">
     <form>
 
         <label>m² Gras</label>
-        <input type="number">
+        <input type="number"><br>
 
         <label>m² Tegels</label>
-        <input type="number">
+        <input type="number"><br>
 
         <label>Meters Heg</label>
         <input type="number">
 
-        <div>
+        <div class="custom-knoppen">
             <label>
                 <input type="checkbox"> Opties
             </label>
@@ -61,19 +66,19 @@
             </label>
         </div>
 
-        <button type="button">Bereken Offerte</button>
+        <button type="button" class="bereken">Bereken Offerte</button>
 
     </form>
-</section>
+</section><br>
 
 <!-- MIJN ORDERS -->
 <section class="orders">
 
     <div class="orders-header">
-        <h2>Mijn Orders</h2>
-        <button>Bestel</button>
+        <h2 class="headersub">Mijn Orders</h2>
+        <button class="headersub">Bestel</button>
     </div>
-
+    <hr class="custom-divider">
     <div class="orders-grid">
 
         <!--  -->
@@ -88,9 +93,8 @@
 
 </section>
 
-
 <!-- FOOTER -->
-<footer>
+<footer class="footer">
     <a href="">Contact</a>
     <a href="">Social Media </a>
     <a href="">Disclaimer</a>

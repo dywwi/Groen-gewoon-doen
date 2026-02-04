@@ -1,0 +1,40 @@
+.body {
+    border: solid;
+    width: 300px;
+}
+
+hr.custom-divider {
+    border: none;
+    height: 1px;
+    background-color: #000;
+    margin: 20px 0;
+}
+
+.standaard {
+    border: solid;
+    width: 275px;
+    text-align: center;
+    margin: auto;
+}
+
+.custom-offerte {
+    border: solid;
+    width: 275px;
+    text-align: center;
+    margin: auto;
+}
+
+.orders {
+    border: solid;
+    width: 275px;
+    text-align: center;
+    margin: auto;
+}
+
+.orders-header {
+    justify-content: flex-end;
+}
+
+.headersub {
+    display: inline-block;
+}
