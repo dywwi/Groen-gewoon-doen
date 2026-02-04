@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Groen & Gewoon Doen</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<div class="admin-page">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="header-left">
+      <button class="menu-button">☰</button>
+      <span class="header-title">Admin - Groen & Gewoon Doen</span>
+    </div>
+
+    <button class="logout-button">Logout</button>
+  </header>
+
+  <!-- Content -->
+  <main class="admin-content">
+
+    <!-- Orders -->
+    <section>
+      <h2>Orders Overzicht</h2>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Order ID</th>
+            <th>Klant</th>
+            <th>Details</th>
+            <th>Offerte</th>
+            <th>Status</th>
+            <th>Acties</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Packages -->
+    <section>
+      <h2>Pakketten Beheren</h2>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Naam</th>
+            <th>Prijs</th>
+            <th>Bewerk</th>
+            <th>Verwijder</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+      <div class="form-box">
+        <h3>Nieuw Pakket</h3>
+
+        <label>
+          Naam
+          <input type="text">
+        </label>
+
+        <label>
+          Beschrijving
+          <input type="text">
+        </label>
+
+        <label>
+          Prijs
+          <input type="number">
+        </label>
+
+        <button>Toevoegen</button>
+      </div>
+    </section>
+
+    <!-- Rates -->
+    <section>
+      <h2>Tarieven Beheren <span class="optional"></span></h2>
+
+      <div class="form-inline">
+        <label>
+          Prijs per m² Gras
+          <input type="number">
+        </label>
+
+        <label>
+          Prijs per m² Tegels
+          <input type="number">
+        </label>
+
+        <button>Opslaan</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="admin-footer">
+    © Groen & Gewoon Doen - Admin Paneel
+  </footer>
+
+</div>
+
+</body>
+</html>
