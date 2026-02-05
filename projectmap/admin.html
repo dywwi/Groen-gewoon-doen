@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Groen & Gewoon Doen</title>
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="admin-body">
 
 <div class="admin-page">
 
@@ -14,11 +14,12 @@
   <header class="admin-header">
     <div class="header-left">
       <button class="menu-button">☰</button>
-      <span class="header-title">Admin - Groen & Gewoon Doen</span>
+      <h4 class="header-title">Admin - Groen & Gewoon Doen</h4>
     </div>
 
     <button class="logout-button">Logout</button>
   </header>
+  <hr class="custom-divider">
 
   <!-- Content -->
   <main class="admin-content">
@@ -43,6 +44,7 @@
         </tbody>
       </table>
     </section>
+    <hr class="custom-divider">
 
     <!-- Packages -->
     <section>
@@ -68,21 +70,22 @@
         <label>
           Naam
           <input type="text">
-        </label>
+        </label><br>
 
         <label>
           Beschrijving
           <input type="text">
-        </label>
+        </label><br>
 
         <label>
           Prijs
           <input type="number">
-        </label>
+        </label><br>
 
         <button>Toevoegen</button>
       </div>
     </section>
+    <hr class="custom-divider">
 
     <!-- Rates -->
     <section>
@@ -92,18 +95,19 @@
         <label>
           Prijs per m² Gras
           <input type="number">
-        </label>
+        </label><br>
 
         <label>
           Prijs per m² Tegels
           <input type="number">
-        </label>
+        </label><br>
 
         <button>Opslaan</button>
       </div>
-    </section>
+    </section><br>
 
   </main>
+<hr class="custom-divider">
 
   <!-- Footer -->
   <footer class="admin-footer">
