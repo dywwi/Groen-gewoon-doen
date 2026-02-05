@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Groen & Gewoon Doen</title>
   <link rel="stylesheet" href="">
+  <script src="js/admin.js"></script>
 </head>
 <body>
 
@@ -19,12 +20,19 @@
 
     <button class="logout-button">Logout</button>
   </header>
+  
+<nav class="admin-nav">
+  <button data-section="orders-section">Orders</button>
+  <button data-section="packages-section">Pakketten</button>
+  <button data-section="tarieven-section">Tarieven</button>
+</nav>
+
 
   <!-- Content -->
   <main class="admin-content">
 
     <!-- Orders -->
-    <section>
+    <section id="orders-section">
       <h2>Orders Overzicht</h2>
 
       <table class="admin-table">
@@ -45,7 +53,7 @@
     </section>
 
     <!-- Packages -->
-    <section>
+    <section id="packages-section">
       <h2>Pakketten Beheren</h2>
 
       <table class="admin-table">
@@ -84,8 +92,8 @@
       </div>
     </section>
 
-    <!-- Rates -->
-    <section>
+    <!-- Tarieven Beheren -->
+    <section id="tarieven-section">
       <h2>Tarieven Beheren <span class="optional"></span></h2>
 
       <div class="form-inline">
