@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/dywwi/Groen-gewoon-doen/issues"
   },
-  "homepage": "https://github.com/dywwi/Groen-gewoon-doen#readme"
+  "homepage": "https://github.com/dywwi/Groen-gewoon-doen#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
 }
