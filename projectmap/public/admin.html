@@ -52,6 +52,36 @@
         <tbody>
         </tbody>
       </table>
+
+      <div class="form-box">
+  <h3>Nieuw Order</h3>
+
+  <label>
+    Klant
+    <input type="text" id="klant">
+  </label><br>
+
+  <label>
+    Details
+    <input type="text" id="details">
+  </label><br>
+
+  <label>
+    Offerte (€)
+    <input type="number" id="offerte">
+  </label><br>
+
+  <label>
+    Status
+    <select id="status">
+      <option value="nieuw">Nieuw</option>
+      <option value="in behandeling">In behandeling</option>
+      <option value="afgerond">Afgerond</option>
+    </select>
+  </label><br>
+
+  <button onclick="handleCreateOrder()">Toevoegen</button>
+</div>
     </section>
     <hr class="custom-divider">
 
@@ -64,8 +94,6 @@
           <tr>
             <th>Naam</th>
             <th>Prijs</th>
-            <th>Bewerk</th>
-            <th>Verwijder</th>
             <th></th>
           </tr>
         </thead>
