@@ -55,45 +55,45 @@
     </section>
     <hr class="custom-divider">
 
-    <!-- Packages -->
     <section id="packages-section">
-      <h2>Pakketten Beheren</h2>
+  <h2>Pakketten Beheren</h2>
 
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Naam</th>
-            <th>Prijs</th>
-            <th>Bewerk</th>
-            <th>Verwijder</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Bewerk</th>
+        <th>Verwijder</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 
-      <div class="form-box">
-        <h3>Nieuw Pakket</h3>
+  <div class="form-box">
+    <h3>Nieuw Pakket</h3>
 
-        <label>
-          Naam
-          <input type="text">
-        </label><br>
+    <label>
+      Naam
+      <input type="text" id="package-name">
+    </label><br>
 
-        <label>
-          Beschrijving
-          <input type="text">
-        </label><br>
+    <label>
+      Beschrijving
+      <input type="text" id="package-description">
+    </label><br>
 
-        <label>
-          Prijs
-          <input type="number">
-        </label><br>
+    <label>
+      Prijs
+      <input type="number" id="package-price">
+    </label><br>
 
-        <button>Toevoegen</button>
-      </div>
-    </section>
+    <button onclick="addPackage()">Toevoegen</button>
+  </div>
+</section>
+
     <hr class="custom-divider">
 
     <!-- Tarieven Beheren -->

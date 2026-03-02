@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const fs = require('fs');
 
 app.use(express.json());
 
@@ -26,7 +27,9 @@ app.delete('/orders/:id', (req, res) => {
 
 // Packages
 app.get('/packages', (req, res) => {
-  res.json([]);
+  const data = fs.readFileSync('packages.json');
+  const packages = JSON.parse(data);
+  res.json(packages);
 });
 
 app.post('/packages', (req, res) => {
