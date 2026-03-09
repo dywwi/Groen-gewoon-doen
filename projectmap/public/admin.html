@@ -73,6 +73,52 @@
   </div>
 </section>
 
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Order ID</th>
+            <th>Klant</th>
+            <th>Details</th>
+            <th>Offerte</th>
+            <th>Status</th>
+            <th>Acties</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+      <div class="form-box">
+  <h3>Nieuw Order</h3>
+
+  <label>
+    Klant
+    <input type="text" id="klant">
+  </label><br>
+
+  <label>
+    Details
+    <input type="text" id="details">
+  </label><br>
+
+  <label>
+    Offerte (€)
+    <input type="number" id="offerte">
+  </label><br>
+
+  <label>
+    Status
+    <select id="status">
+      <option value="nieuw">Nieuw</option>
+      <option value="in behandeling">In behandeling</option>
+      <option value="afgerond">Afgerond</option>
+    </select>
+  </label><br>
+
+  <button onclick="handleCreateOrder()">Toevoegen</button>
+</div>
+    </section>
     <hr class="custom-divider">
 
     <section id="packages-section">
@@ -91,6 +137,17 @@
     <tbody>
     </tbody>
   </table>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Naam</th>
+            <th>Prijs</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
 
   <div class="form-box">
     <h3>Nieuw Pakket</h3>

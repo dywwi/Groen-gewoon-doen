@@ -42,5 +42,32 @@ document.addEventListener("DOMContentLoaded", () => {
         tbody.appendChild(tr);
       });
     })
-    .catch(err => console.error('Ошибка загрузки заказов:', err));
+    .catch(err => console.error('Error:', err));
 });
+
+function handleCreateOrder() {
+  const orderData = {
+    klant: document.getElementById('klant').value,
+    details: document.getElementById('details').value,
+    offerte: Number(document.getElementById('offerte').value),
+    status: document.getElementById('status').value
+  };
+
+  createOrder(orderData);
+}
+
+function createOrder(orderData) {
+  fetch('/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(orderData)
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Order added:', data);
+      // loadOrders(); // если есть
+    })
+    .catch(err => console.error(err));
+}
