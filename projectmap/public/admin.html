@@ -247,6 +247,36 @@ function editPackage(id) {
 }
 
 loadPackages();
+
+// CreateOrder functie 
+async function handleCreateOrder() {
+
+  const klant = document.getElementById("klant").value;
+  const details = document.getElementById("details").value;
+  const offerte = document.getElementById("offerte").value;
+  const status = document.getElementById("status").value;
+
+  const order = {
+    klant: klant,
+    details: details,
+    offerte: offerte,
+    status: status
+  };
+
+  const response = await fetch("/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(order)
+  });
+
+  if (response.ok) {
+    alert("Order toegevoegd!");
+  } else {
+    alert("Er ging iets mis.");
+  }
+}
 </script>
 
   <!-- Footer -->

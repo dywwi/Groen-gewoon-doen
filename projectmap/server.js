@@ -13,6 +13,29 @@ app.get('/orders', (req, res) => {
   ]);
 });
 
+//form
+app.post("/orders", (req, res) => {
+
+  const { gras, tegels, heg } = req.body;
+
+  const newOrder = {
+    id: Date.now(),
+    gras,
+    tegels,
+    heg,
+    status: "nieuw"
+  };
+
+  const orders = require("./data/orders.json");
+
+  orders.push(newOrder);
+
+  fs.writeFileSync("./data/orders.json", JSON.stringify(orders, null, 2));
+
+  res.send("Order ontvangen!");
+
+});
+
 app.post('/orders', (req, res) => {
   res.json({ message: 'Order created' });
 });
