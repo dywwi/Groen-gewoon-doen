@@ -67,7 +67,7 @@ function createOrder(orderData) {
     .then(res => res.json())
     .then(data => {
       console.log('Order added:', data);
-      // loadOrders(); // если есть
+      // loadOrders();
     })
     .catch(err => console.error(err));
 }

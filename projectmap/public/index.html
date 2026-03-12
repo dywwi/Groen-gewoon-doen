@@ -48,25 +48,25 @@
     <form>
 
         <label>m² Gras</label>
-        <input type="number"><br>
+        <input id="gras" type="number"><br>
 
         <label>m² Tegels</label>
-        <input type="number"><br>
+        <input id="tegels" type="number"><br>
 
         <label>Meters Heg</label>
-        <input type="number">
+        <input id="heg" type="number">
 
         <div class="custom-knoppen">
-            <label>
-                <input type="checkbox"> Opties
-            </label>
 
-            <label>
-                <input type="checkbox"> Opties
-            </label>
         </div>
 
-        <button type="button" class="bereken">Bereken Offerte</button>
+        <button type="button" onclick="berekenOfferte()">
+  Bereken Offerte
+</button>
+    <button type="button" onclick="bestelOfferte()">
+ Bestel
+</button>
+<p id="prijs"></p>
 
     </form>
 </section><br>
@@ -107,6 +107,6 @@
     <a href="">Social Media </a>
     <a href="">Disclaimer</a>
 </footer>
-
+<script src="js/main.js"></script>
 </body>
 </html>

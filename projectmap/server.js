@@ -1,20 +1,40 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const { calculateQuote } = require('./quote')
+const fs = require('fs')
 
 app.use(express.json());
 
-// Orders
 app.get('/orders', (req, res) => {
-  res.json([
- { id: 1, klant: 'Jan', details: 'Product A', offerte: '€100', status: 'Nieuw', date: '2026-02-12' },
-    { id: 2, klant: 'Piet', details: 'Product B', offerte: '€200', status: 'Verwerkt', date: '2026-02-13' }
-  ]);
-});
+
+  const orders = JSON.parse(
+    fs.readFileSync('./data/orders.json')
+  )
+
+  res.json(orders)
+})
 
 app.post('/orders', (req, res) => {
-  res.json({ message: 'Order created' });
-});
+
+  const orders = JSON.parse(
+    fs.readFileSync('./data/orders.json')
+  )
+
+  const newOrder = {
+    id: orders.length + 1,
+    ...req.body
+  }
+
+  orders.push(newOrder)
+
+  fs.writeFileSync(
+    './data/orders.json',
+    JSON.stringify(orders, null, 2)
+  )
+
+  res.json({ message: 'Order saved' })
+})
 
 app.put('/orders/:id', (req, res) => {
   res.json({ message: 'Order updated' });
@@ -40,6 +60,11 @@ app.put('/packages/:id', (req, res) => {
 app.delete('/packages/:id', (req, res) => {
   res.json({ message: 'Package deleted' });
 });
+
+app.post('/calculate', (req, res) => {
+  const price = calculateQuote(req.body)
+  res.json({ price })
+})
 
 // Frontend
 app.use(express.static('public'));

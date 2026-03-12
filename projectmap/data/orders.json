@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": 1,
+    "gras": 5,
+    "tegels": 5,
+    "heg": 5,
+    "prijs": 0,
+    "status": "Nieuw",
+    "date": "2026-03-05"
+  },
+  {
+    "id": 2,
+    "gras": 6,
+    "tegels": 66,
+    "heg": 6,
+    "prijs": 0,
+    "status": "Nieuw",
+    "date": "2026-03-05"
+  },
+  {
+    "id": 3,
+    "gras": 6,
+    "tegels": 6,
+    "heg": 5,
+    "prijs": 138,
+    "status": "Nieuw",
+    "date": "2026-03-05"
+  }
+]
