@@ -15,6 +15,29 @@ app.get('/orders', (req, res) => {
   res.json(orders)
 })
 
+//form
+app.post("/orders", (req, res) => {
+
+  const { gras, tegels, heg } = req.body;
+
+  const newOrder = {
+    id: Date.now(),
+    gras,
+    tegels,
+    heg,
+    status: "nieuw"
+  };
+
+  const orders = require("./data/orders.json");
+
+  orders.push(newOrder);
+
+  fs.writeFileSync("./data/orders.json", JSON.stringify(orders, null, 2));
+
+  res.send("Order ontvangen!");
+
+});
+
 app.post('/orders', (req, res) => {
 
   const orders = JSON.parse(
@@ -46,7 +69,9 @@ app.delete('/orders/:id', (req, res) => {
 
 // Packages
 app.get('/packages', (req, res) => {
-  res.json([]);
+  const data = fs.readFileSync('packages.json');
+  const packages = JSON.parse(data);
+  res.json(packages);
 });
 
 app.post('/packages', (req, res) => {

@@ -33,8 +33,44 @@
   <main class="admin-content">
 
     <!-- Orders -->
-    <section id="orders-section">
-      <h2>Orders Overzicht</h2>
+    <section id="packages-section">
+  <h2>Pakketten Beheren</h2>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Bewerk</th>
+        <th>Verwijder</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="form-box">
+    <h3>Nieuw Pakket</h3>
+
+    <label>
+      Naam
+      <input type="text" id="package-name">
+    </label><br>
+
+    <label>
+      Beschrijving
+      <input type="text" id="package-description">
+    </label><br>
+
+    <label>
+      Prijs
+      <input type="number" id="package-price">
+    </label><br>
+
+    <button onclick="addPackage()">Toevoegen</button>
+  </div>
+</section>
 
       <table class="admin-table">
         <thead>
@@ -84,10 +120,22 @@
     </section>
     <hr class="custom-divider">
 
-    <!-- Packages -->
     <section id="packages-section">
-      <h2>Pakketten Beheren</h2>
+  <h2>Pakketten Beheren</h2>
 
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Bewerk</th>
+        <th>Verwijder</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
       <table class="admin-table">
         <thead>
           <tr>
@@ -100,27 +148,28 @@
         </tbody>
       </table>
 
-      <div class="form-box">
-        <h3>Nieuw Pakket</h3>
+  <div class="form-box">
+    <h3>Nieuw Pakket</h3>
 
-        <label>
-          Naam
-          <input type="text">
-        </label><br>
+    <label>
+      Naam
+      <input type="text" id="package-name">
+    </label><br>
 
-        <label>
-          Beschrijving
-          <input type="text">
-        </label><br>
+    <label>
+      Beschrijving
+      <input type="text" id="package-description">
+    </label><br>
 
-        <label>
-          Prijs
-          <input type="number">
-        </label><br>
+    <label>
+      Prijs
+      <input type="number" id="package-price">
+    </label><br>
 
-        <button>Toevoegen</button>
-      </div>
-    </section>
+    <button onclick="addPackage()">Toevoegen</button>
+  </div>
+</section>
+
     <hr class="custom-divider">
 
     <!-- Tarieven Beheren -->
@@ -144,6 +193,90 @@
 
   </main>
 <hr class="custom-divider">
+
+<script>
+async function loadPackages() {
+  const response = await fetch('/packages');
+  const packages = await response.json();
+
+  const tbody = document.querySelector('#packages-section tbody');
+  tbody.innerHTML = '';
+
+  packages.forEach((pkg, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${pkg.name}</td>
+      <td>${pkg.description}</td>
+      <td>€${pkg.price}</td>
+      <td><button onclick="editPackage(${index})">Bewerk</button></td>
+      <td><button onclick="deletePackage(${index})">Verwijder</button></td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+async function addPackage() {
+  const name = document.getElementById('package-name').value;
+  const description = document.getElementById('package-description').value;
+  const price = document.getElementById('package-price').value;
+
+  if(!name || !description || !price) return alert('Vul alle velden in!');
+
+  await fetch('/packages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, description, price })
+  });
+
+  document.getElementById('package-name').value = '';
+  document.getElementById('package-description').value = '';
+  document.getElementById('package-price').value = '';
+
+  loadPackages();
+}
+
+async function deletePackage(id) {
+  if(!confirm('Weet je zeker dat je dit pakket wilt verwijderen?')) return;
+  await fetch('/packages/' + id, { method: 'DELETE' });
+  loadPackages();
+}
+
+function editPackage(id) {
+  alert("Bewerk functie niet volledig geïmplementeerd voor ID: " + id);
+}
+
+loadPackages();
+
+// CreateOrder functie 
+async function handleCreateOrder() {
+
+  const klant = document.getElementById("klant").value;
+  const details = document.getElementById("details").value;
+  const offerte = document.getElementById("offerte").value;
+  const status = document.getElementById("status").value;
+
+  const order = {
+    klant: klant,
+    details: details,
+    offerte: offerte,
+    status: status
+  };
+
+  const response = await fetch("/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(order)
+  });
+
+  if (response.ok) {
+    alert("Order toegevoegd!");
+  } else {
+    alert("Er ging iets mis.");
+  }
+}
+</script>
 
   <!-- Footer -->
   <footer class="admin-footer">
