@@ -60,8 +60,30 @@ app.post('/orders', (req, res) => {
 })
 
 app.put('/orders/:id', (req, res) => {
-  res.json({ message: 'Order updated' });
-});
+
+  const orders = JSON.parse(
+    fs.readFileSync('./data/orders.json')
+  )
+
+  const id = Number(req.params.id)
+
+  const order = orders.find(o => o.id === id)
+
+  if (!order) {
+    return res.status(404).json({ message: 'Order not found' })
+  }
+
+  // update fields
+  order.status = req.body.status
+  order.date = new Date().toISOString().split('T')[0]
+
+  fs.writeFileSync(
+    './data/orders.json',
+    JSON.stringify(orders, null, 2)
+  )
+
+  res.json({ message: 'Order updated', order })
+})
 
 app.delete('/orders/:id', (req, res) => {
   res.json({ message: 'Order deleted' });

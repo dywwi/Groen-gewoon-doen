@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Groen & Gewoon Doen</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body class="admin-body">
 
@@ -18,7 +17,7 @@
       <h4 class="header-title">Admin - Groen & Gewoon Doen</h4>
     </div>
 
-    <button class="logout-button">Logout</button>
+ <button class="nav-button" onclick="goToIndex()">Naar Website</button>
   </header>
   <hr class="custom-divider">
   
@@ -33,45 +32,7 @@
   <main class="admin-content">
 
     <!-- Orders -->
-    <section id="packages-section">
-  <h2>Pakketten Beheren</h2>
-
-  <table class="admin-table">
-    <thead>
-      <tr>
-        <th>Naam</th>
-        <th>Beschrijving</th>
-        <th>Prijs</th>
-        <th>Bewerk</th>
-        <th>Verwijder</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-
-  <div class="form-box">
-    <h3>Nieuw Pakket</h3>
-
-    <label>
-      Naam
-      <input type="text" id="package-name">
-    </label><br>
-
-    <label>
-      Beschrijving
-      <input type="text" id="package-description">
-    </label><br>
-
-    <label>
-      Prijs
-      <input type="number" id="package-price">
-    </label><br>
-
-    <button onclick="addPackage()">Toevoegen</button>
-  </div>
-</section>
-
+    <section id="orders-section">
       <table class="admin-table">
         <thead>
           <tr>
@@ -120,6 +81,7 @@
     </section>
     <hr class="custom-divider">
 
+  
     <section id="packages-section">
   <h2>Pakketten Beheren</h2>
 
@@ -136,17 +98,6 @@
     <tbody>
     </tbody>
   </table>
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Naam</th>
-            <th>Prijs</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
 
   <div class="form-box">
     <h3>Nieuw Pakket</h3>
@@ -277,6 +228,7 @@ async function handleCreateOrder() {
   }
 }
 </script>
+
 
   <!-- Footer -->
   <footer class="admin-footer">
