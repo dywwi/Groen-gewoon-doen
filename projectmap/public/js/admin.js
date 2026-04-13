@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setupNavigation() {
 
-  const buttons = document.querySelectorAll(".admin-nav button");
+  const buttons = document.querySelectorAll("nav button");
   const sections = document.querySelectorAll("main section");
 
   function hideAll() {
@@ -64,9 +64,7 @@ async function loadOrders() {
     tr.innerHTML = `
       <td>${index + 1}</td>
       <td>${order.id ?? ""}</td>
-      <td>${order.klant ?? ""}</td>
-      <td>${order.details ?? ""}</td>
-      <td>€${order.offerte ?? ""}</td>
+      <td>${order.prijs ?? ""}</td>
       <td>
         <select onchange="updateOrderStatus(${order.id}, this.value)">
           <option ${order.status === 'Nieuw' ? 'selected' : ''}>Nieuw</option>
@@ -88,8 +86,9 @@ function handleCreateOrder() {
   const order = {
     klant: document.getElementById("klant").value,
     details: document.getElementById("details").value,
-    offerte: Number(document.getElementById("offerte").value),
-    status: document.getElementById("status").value
+    prijs: Number(document.getElementById("prijs").value),
+    status: document.getElementById("status").value,
+        date: new Date().toISOString().split('T')[0]
   };
 
   fetch("/orders", {
@@ -115,97 +114,117 @@ function updateOrderStatus(id, status) {
   .then(() => loadOrders());
 }
 
-
-// ===============================
-// PACKAGES CRUD
-// ===============================
-
 async function loadPackages() {
-
-  const response = await fetch("/packages");
+  const response = await fetch('/packages');
   const packages = await response.json();
 
-  const tbody = document.querySelector("#packages-section tbody");
+  const tbody = document.querySelector('#packages-section tbody');
+  tbody.innerHTML = '';
 
-  if (!tbody) return;
-
-  tbody.innerHTML = "";
-
-  packages.forEach(pkg => {
-
-    const row = document.createElement("tr");
-
+  packages.forEach((pkg, index) => {
+    const row = document.createElement('tr');
     row.innerHTML = `
       <td>${pkg.name}</td>
       <td>${pkg.description}</td>
       <td>€${pkg.price}</td>
-      <td><button onclick="editPackage(${pkg.id})">Bewerk</button></td>
-      <td><button onclick="deletePackage(${pkg.id})">Verwijder</button></td>
+      <td><button onclick="editPackage(${index})">Bewerk</button></td>
+      <td><button onclick="deletePackage(${index})">Verwijder</button></td>
     `;
-
     tbody.appendChild(row);
   });
 }
 
-
-// CREATE
 async function addPackage() {
+  const name = document.getElementById('package-name').value;
+  const description = document.getElementById('package-description').value;
+  const price = document.getElementById('package-price').value;
 
-  const name = document.getElementById("package-name").value;
-  const description = document.getElementById("package-description").value;
-  const price = document.getElementById("package-price").value;
+  if(!name || !description || !price) return alert('Vul alle velden in!');
 
-  if (!name || !description || !price) {
-    alert("Vul alle velden in!");
-    return;
-  }
-
-  await fetch("/packages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+  await fetch('/packages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, description, price })
   });
 
+  document.getElementById('package-name').value = '';
+  document.getElementById('package-description').value = '';
+  document.getElementById('package-price').value = '';
+
   loadPackages();
 }
 
-
-// DELETE
 async function deletePackage(id) {
-
-  if (!confirm("Weet je zeker?")) return;
-
-  await fetch(`/packages/${id}`, {
-    method: "DELETE"
-  });
-
+  if(!confirm('Weet je zeker dat je dit pakket wilt verwijderen?')) return;
+  await fetch('/packages/' + id, { method: 'DELETE' });
   loadPackages();
 }
 
-
-// UPDATE (быстрый способ)
 async function editPackage(id) {
 
-  const newPrice = prompt("Nieuwe prijs:");
+  const name = prompt("Nieuwe naam:")
+  const description = prompt("Nieuwe beschrijving:")
+  const price = prompt("Nieuwe prijs:")
 
-  if (!newPrice) return;
+  if (!name || !description || !price) return
 
-  await fetch(`/packages/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ price: newPrice })
+  await fetch('/packages/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, description, price })
+  })
+
+  loadPackages()
+}
+
+// CreateOrder functie 
+async function handleCreateOrder() {
+
+  const klant = document.getElementById("klant").value;
+  const details = document.getElementById("details").value;
+  const offerte = document.getElementById("offerte").value;
+  const status = document.getElementById("status").value;
+
+  const order = {
+    klant: klant,
+    details: details,
+    offerte: offerte,
+    status: status
+  };
+
+  const response = await fetch("/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(order)
   });
 
-  loadPackages();
+  if (response.ok) {
+    alert("Order toegevoegd!");
+  } else {
+    alert("Er ging iets mis.");
+  }
 }
 
+async function loadTarieven() {
+  const response = await fetch('/tarieven')
+  const data = await response.json()
 
-// ===============================
-// NAVIGATION TO INDEX
-// ===============================
-
-function goToIndex() {
-  window.location.href = "/index.html";
+  document.getElementById('prijs-gras').value = data.gras
+  document.getElementById('prijs-tegels').value = data.tegels
 }
 
-window.goToIndex = goToIndex;
+async function saveTarieven() {
+
+  const gras = document.getElementById('prijs-gras').value
+  const tegels = document.getElementById('prijs-tegels').value
+
+  await fetch('/tarieven', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ gras, tegels })
+  })
+
+  alert("Opgeslagen!")
+}

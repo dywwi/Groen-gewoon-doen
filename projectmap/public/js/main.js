@@ -91,3 +91,51 @@ async function updateStatus(newStatus) {
 function goToAdmin() {
   window.location.href = "/admin.html";
 }
+
+async function bestelPakket() {
+
+  const pakket = document.getElementById('pakket').value
+
+  if (!pakket) {
+    alert("Kies eerst een pakket!")
+    return
+  }
+
+  let orderData = {}
+
+  if (pakket === "basis") {
+    orderData = {
+      gras: 10,
+      tegels: 5,
+      heg: 2,
+      prijs: 100,
+      type: "Basis pakket"
+    }
+  }
+
+  if (pakket === "premium") {
+    orderData = {
+      gras: 20,
+      tegels: 10,
+      heg: 5,
+      prijs: 250,
+      type: "Premium pakket"
+    }
+  }
+
+  const order = {
+    ...orderData,
+    status: "Nieuw",
+    date: new Date().toISOString().split('T')[0]
+  }
+
+  console.log(order) //
+
+  await fetch('/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  })
+
+  alert("Bestelling verzonden!")
+}

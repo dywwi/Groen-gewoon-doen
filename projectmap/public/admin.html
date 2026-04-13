@@ -4,16 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Groen & Gewoon Doen</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="admin-body">
-
-<div class="admin-page">
+<body class="body">
 
   <!-- Header -->
-  <header class="admin-header">
-    <div class="header-left">
-      <button class="menu-button">☰</button>
+  <header class="header">
+    <div class="header-left"></div>
       <h4 class="header-title">Admin - Groen & Gewoon Doen</h4>
     </div>
 
@@ -21,7 +18,7 @@
   </header>
   <hr class="custom-divider">
   
-<nav class="admin-nav">
+<nav class="nav">
   <button data-section="orders-section">Orders</button>
   <button data-section="packages-section">Pakketten</button>
   <button data-section="tarieven-section">Tarieven</button>
@@ -29,20 +26,18 @@
 
 
   <!-- Content -->
-  <main class="admin-content">
+  <main class="content">
 
     <!-- Orders -->
-    <section id="orders-section">
-      <table class="admin-table">
+    <section class="card" id="orders-section">
+      <table class="table">
         <thead>
           <tr>
             <th></th>
             <th>Order ID</th>
-            <th>Klant</th>
-            <th>Details</th>
-            <th>Offerte</th>
+            <th>Prijs</th>
             <th>Status</th>
-            <th>Acties</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -82,10 +77,10 @@
     <hr class="custom-divider">
 
   
-    <section id="packages-section">
+    <section class="card" id="packages-section">
   <h2>Pakketten Beheren</h2>
 
-  <table class="admin-table">
+  <table class="table">
     <thead>
       <tr>
         <th>Naam</th>
@@ -124,118 +119,32 @@
     <hr class="custom-divider">
 
     <!-- Tarieven Beheren -->
-    <section id="tarieven-section">
+    <section class="card" id="tarieven-section">
       <h2>Tarieven Beheren <span class="optional"></span></h2>
 
       <div class="form-inline">
         <label>
           Prijs per m² Gras
-          <input type="number">
+          <input type="number" id="prijs-gras">
         </label><br>
 
         <label>
           Prijs per m² Tegels
-          <input type="number">
+          <input type="number" id="prijs-tegels">
         </label><br>
 
-        <button>Opslaan</button>
+        <button onclick="saveTarieven()">Opslaan</button>
       </div>
     </section><br>
+</main>
 
-  </main>
 <hr class="custom-divider">
 
-<script>
-async function loadPackages() {
-  const response = await fetch('/packages');
-  const packages = await response.json();
-
-  const tbody = document.querySelector('#packages-section tbody');
-  tbody.innerHTML = '';
-
-  packages.forEach((pkg, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${pkg.name}</td>
-      <td>${pkg.description}</td>
-      <td>€${pkg.price}</td>
-      <td><button onclick="editPackage(${index})">Bewerk</button></td>
-      <td><button onclick="deletePackage(${index})">Verwijder</button></td>
-    `;
-    tbody.appendChild(row);
-  });
-}
-
-async function addPackage() {
-  const name = document.getElementById('package-name').value;
-  const description = document.getElementById('package-description').value;
-  const price = document.getElementById('package-price').value;
-
-  if(!name || !description || !price) return alert('Vul alle velden in!');
-
-  await fetch('/packages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, description, price })
-  });
-
-  document.getElementById('package-name').value = '';
-  document.getElementById('package-description').value = '';
-  document.getElementById('package-price').value = '';
-
-  loadPackages();
-}
-
-async function deletePackage(id) {
-  if(!confirm('Weet je zeker dat je dit pakket wilt verwijderen?')) return;
-  await fetch('/packages/' + id, { method: 'DELETE' });
-  loadPackages();
-}
-
-function editPackage(id) {
-  alert("Bewerk functie niet volledig geïmplementeerd voor ID: " + id);
-}
-
-loadPackages();
-
-// CreateOrder functie 
-async function handleCreateOrder() {
-
-  const klant = document.getElementById("klant").value;
-  const details = document.getElementById("details").value;
-  const offerte = document.getElementById("offerte").value;
-  const status = document.getElementById("status").value;
-
-  const order = {
-    klant: klant,
-    details: details,
-    offerte: offerte,
-    status: status
-  };
-
-  const response = await fetch("/orders", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(order)
-  });
-
-  if (response.ok) {
-    alert("Order toegevoegd!");
-  } else {
-    alert("Er ging iets mis.");
-  }
-}
-</script>
-
-
   <!-- Footer -->
-  <footer class="admin-footer">
+  <footer class="footer">
     © Groen & Gewoon Doen - Admin Paneel
   </footer>
 
-</div>
   <script src="js/admin.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@
 <hr class="custom-divider">
 
 <!-- WELKOM -->
-<section class="welcome">
+<section class="card"  class="welcome">
     <h1>Welkom!</h1>
     <p>Bestel uw tuinservice eenvoudig online!</p>
 </section>
@@ -27,21 +27,21 @@
 <hr class="custom-divider">
 
 <!-- STANDAARD PAKKETTEN -->
-<section class="standaard">
+<section class="card" class="standaard">
     <h2>Standaard Pakketten</h2>
     <hr class="custom-divider">
 
-    <select>
-        <option>Kies een pakket</option>
-        <option>Basis pakket</option>
-        <option>Premium pakket</option>
+    <select id="pakket">
+        <option value="">Kies een pakket</option>
+        <option value="basis">Basis pakket</option>
+        <option value="premium">Premium pakket</option>
     </select>
 
-    <button>Bestel</button>
+    <button onclick="bestelPakket()">Bestel</button>
 </section><br>
 
 <!-- CUSTOM OFFERTE -->
-<section class="custom-offerte">
+<section class="card" class="custom-offerte">
     <h2>Custom Offerte</h2>
     <hr class="custom-divider">
     <form action="">
@@ -71,7 +71,7 @@
 </section><br>
 
 <!-- MIJN ORDERS -->
-<section class="orders">
+<section class="card"  class="orders">
 
     <div class="orders-header">
         <h2 class="headersub">Mijn Orders</h2>

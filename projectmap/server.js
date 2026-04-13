@@ -16,37 +16,22 @@ app.get('/orders', (req, res) => {
 })
 
 //form
-app.post("/orders", (req, res) => {
-
-  const { gras, tegels, heg } = req.body;
-
-  const newOrder = {
-    id: Date.now(),
-    gras,
-    tegels,
-    heg,
-    status: "nieuw"
-  };
-
-  const orders = require("./data/orders.json");
-
-  orders.push(newOrder);
-
-  fs.writeFileSync("./data/orders.json", JSON.stringify(orders, null, 2));
-
-  res.send("Order ontvangen!");
-
-});
-
 app.post('/orders', (req, res) => {
 
   const orders = JSON.parse(
     fs.readFileSync('./data/orders.json')
   )
 
+  const { gras, tegels, heg, prijs, date, status } = req.body
+
   const newOrder = {
-    id: orders.length + 1,
-    ...req.body
+    id: Date.now(), // или orders.length + 1
+    gras,
+    tegels,
+    heg,
+    prijs,
+    date,
+    status: status || "nieuw"
   }
 
   orders.push(newOrder)
@@ -56,7 +41,7 @@ app.post('/orders', (req, res) => {
     JSON.stringify(orders, null, 2)
   )
 
-  res.json({ message: 'Order saved' })
+  res.json({ message: 'Order saved', order: newOrder })
 })
 
 app.put('/orders/:id', (req, res) => {
@@ -91,26 +76,105 @@ app.delete('/orders/:id', (req, res) => {
 
 // Packages
 app.get('/packages', (req, res) => {
-  const data = fs.readFileSync('packages.json');
-  const packages = JSON.parse(data);
-  res.json(packages);
-});
+  const packages = JSON.parse(
+    fs.readFileSync('./data/packages.json')
+  )
+  res.json(packages)
+})
 
 app.post('/packages', (req, res) => {
-  res.json({ message: 'Package created' });
-});
+
+  const { name, description, price } = req.body
+
+  const packages = JSON.parse(
+    fs.readFileSync('./data/packages.json')
+  )
+
+  const newPackage = {
+    id: Date.now(),
+    name,
+    description,
+    price: Number(price)
+  }
+
+  packages.push(newPackage)
+
+  fs.writeFileSync(
+    './data/packages.json',
+    JSON.stringify(packages, null, 2)
+  )
+
+  res.json({ message: 'Package toegevoegd', package: newPackage })
+})
 
 app.put('/packages/:id', (req, res) => {
-  res.json({ message: 'Package updated' });
-});
+
+  const id = Number(req.params.id)
+  const { name, description, price } = req.body
+
+  let packages = JSON.parse(
+    fs.readFileSync('./data/packages.json')
+  )
+
+  packages[id] = {
+    ...packages[id],
+    name,
+    description,
+    price: Number(price)
+  }
+
+  fs.writeFileSync(
+    './data/packages.json',
+    JSON.stringify(packages, null, 2)
+  )
+
+  res.json({ message: 'Package updated' })
+})
 
 app.delete('/packages/:id', (req, res) => {
-  res.json({ message: 'Package deleted' });
-});
+
+  const id = Number(req.params.id)
+
+  let packages = JSON.parse(
+    fs.readFileSync('./data/packages.json')
+  )
+
+  packages.splice(id, 1)
+
+  fs.writeFileSync(
+    './data/packages.json',
+    JSON.stringify(packages, null, 2)
+  )
+
+  res.json({ message: 'Package verwijderd' })
+})
 
 app.post('/calculate', (req, res) => {
   const price = calculateQuote(req.body)
   res.json({ price })
+})
+
+app.get('/tarieven', (req, res) => {
+  const tarieven = JSON.parse(
+    fs.readFileSync('./data/tarieven.json')
+  )
+  res.json(tarieven)
+})
+app.post('/tarieven', (req, res) => {
+
+  const { gras, tegels } = req.body
+
+  const tarieven = {
+    gras: Number(gras),
+    tegels: Number(tegels)
+  }
+
+  fs.writeFileSync(
+    './data/tarieven.json',
+    JSON.stringify(tarieven, null, 2)
+  )
+
+  res.json({ message: 'Tarieven opgeslagen' })
 })
 
 // Frontend
